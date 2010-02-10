@@ -12,7 +12,11 @@
 #include <stdarg.h>
 
 int main(int argc, char **argv) {
+#ifndef __nucleos__
   char *tests[] = {"t40a", "t40b", "t40c", "t40d", "t40e", "t40f"};
+#else
+  char *tests[] = {"t40a", "t40b", "t40c", "t40d", "t40f"};
+#endif
   int no_tests, i, forkres, status = 0, errorct = 0;
 
   no_tests = sizeof(tests) / sizeof(char *);
