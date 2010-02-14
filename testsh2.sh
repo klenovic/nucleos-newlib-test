@@ -93,7 +93,7 @@ if test -r x; then : ; else echo Error in du Test 1; fi
 
 #Test od			
 head -1 $f |od >x		# see if od converts ascii to octal ok
-if [ $ARCH = i86 -o $ARCH = i386 ]
+if [ $ARCH = i86 -o $ARCH = i386 -o $ARCH = i686 ]
 then
 cat >answer <<END
 0000000 064124 020145 064564 062555 064040 071541 061440 066557
@@ -115,7 +115,7 @@ fi
 if cmp -s x answer; then : ; else echo Error in od test 1; fi
 
 head -1 $f |od -d >x		# see if od converts ascii to decimal ok
-if [ $ARCH = i86 -o $ARCH = i386 ]
+if [ $ARCH = i86 -o $ARCH = i386 -o $ARCH = i686 ]
 then
 cat >answer <<END
 0000000 26708 08293 26996 25965 26656 29537 25376 28015
@@ -246,8 +246,8 @@ cat >answer <<END
    4 the
 END
 
-prep x | sort | uniq -c >y1
-sort +1 <y1 >y
+cat x | tr ' ' \\n | grep -v '^$' | tr ' ' \\n | grep -v '^$' | sort | uniq -c >y1
+sort -k 1 <y1 >y
 if cmp -s y answer; then : ; else echo Error in pipeline test 1; fi
 
 cat $f $f $f | sort | uniq >x

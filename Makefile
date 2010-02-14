@@ -1,12 +1,13 @@
 CC = $(CROSS_COMPILE)gcc
 STRIP  = $(CROSS_COMPILE)strip
-CFLAGS = -O2 -D__nucleos__
+CFLAGS = -O2 -imacros $(CURDIR)/macros.h -D__nucleos__
 
-PROGS = test1  test2  test3  test4  test5  test6  test7  test8  test9 \
+PROGS = test1  test2  test3  test4  test5  test6  test7  test8  test9  test10 \
 	test11 test12 test13 test14 test15 test16 test17 test18 test19 test20 \
 	test21 test22 test23 test24 test25 test26 test27 test28 test29 test30 \
 	test31 test32 test33 test34 test35 test36 test37 test38        test40 \
 	test41 \
+	t10a \
 	t11a t11b \
 	t40a t40b t40c t40d t40f \
 	test_uname \
@@ -28,7 +29,9 @@ test6: test6.o
 test7: test7.o
 test8: test8.o
 test9: test9.o
+test10: test10.o
 test11: test11.o
+t10a: t10a.o
 t11a: t11a.o
 t11b: t11b.o
 test12: test12.o
@@ -82,12 +85,12 @@ strip:
 
 INSTALL_DIR=_install
 
-$(INSTALL_DIR): all
+install: all
 	mkdir -p $(INSTALL_DIR)
 	cp $(PROGS) $(INSTALL_DIR)
-	$(STRIP) $(addprefix $(INSTALL_DIR),$(PROGS))
+	$(STRIP) $(addprefix $(INSTALL_DIR)/,$(PROGS))
 	cp run.sh testsh1.sh testsh2.sh $(INSTALL_DIR)
-	chmod +x $(addprefix $(INSTALL_DIR),run.sh testsh1.sh testsh2.sh)
+	chmod +x $(addprefix $(INSTALL_DIR)/,run.sh testsh1.sh testsh2.sh)
 
 clean:
 	rm -rf *.o $(PROGS) $(INSTALL_DIR)
