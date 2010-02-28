@@ -289,10 +289,10 @@ void test25b()
   if (fd1 != 3) e(108);
   Stat("ho", &st2);
 
+#define CHECK_STAT_WITH_MEMCMP
 #ifdef CHECK_STAT_WITH_MEMCMP
   if (memcmp(&st1, &st2, sizeof(struct stat)) != 0) e(109);
 #else
-	/* @nucleos: prefer this check before memcmp (structure alignment) */
 	if (st1.st_blksize != st2.st_blksize) e(1091);
 	if (st1.st_blocks != st2.st_blocks) e(1092);
 	if (st1.st_uid != st2.st_uid) e(1093);
