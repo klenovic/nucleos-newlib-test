@@ -12,6 +12,8 @@
 #include <signal.h>
 #include <unistd.h>
 #include <errno.h>
+#include <nucleos/com.h>
+#include <nucleos/sysinfo.h>
 
 #define ITERATIONS 3
 #define MAX_ERROR 4
@@ -70,11 +72,7 @@ char **argv;
 {
   int i, m = 0xFFFF, n = 0xF;
 
-#ifdef HAVE_GETSYSINFO_UP
   getsysinfo_up(PM_PROC_NR, SIU_SYSTEMHZ, sizeof(system_hz), &system_hz);
-#else
-system_hz = 60;
-#endif
 
   if (strcmp(argv[0], "DO CHECK") == 0) {
   	timer = atoi(argv[1]);
