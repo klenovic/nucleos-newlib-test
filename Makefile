@@ -15,7 +15,8 @@ PROGS = test1  test2  test3  test4  test5  test6  test7  test8  test9  test10 \
 	test_gettimeofday \
 	test_getenv \
 	test_creat \
-	statcheck
+	statcheck \
+	test_nosys
 # test43 test44
 
 %.o: %.c
@@ -83,6 +84,7 @@ test_gettimeofday: test_gettimeofday.o
 test_getenv: test_getenv.o
 test_creat: test_creat.o
 statcheck: statcheck.o
+test_nosys: test_nosys.o
 
 all: $(PROGS)
 
