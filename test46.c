@@ -16,7 +16,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
+#define _PROTOTYPE(a,b) a b
 _PROTOTYPE( void api_test, (void)					);
 _PROTOTYPE( void e, (int error_no)					);
 _PROTOTYPE( void group_test, (void)					);
