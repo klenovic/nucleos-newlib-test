@@ -8,9 +8,14 @@
  *  the Free Software Foundation, version 2 of the License.
  */
 #include <nucleos/unistd.h>
-#include <asm/syscall.h>
 #include <errno.h>
 #include <stdio.h>
+
+#define ASM_SYSCALL_CALL_SYSTEM		"int $0x80\t\n"
+#define INTERNAL_SYSCALL_ERROR_P(val, err) \
+	((unsigned int) (val) >= 0xfffff001u)
+#define INTERNAL_SYSCALL_ERRNO(val, err)	(-(val))
+#define __set_errno(val)	(errno = (val))
 
 int nosys(void)
 {
